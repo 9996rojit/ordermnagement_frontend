@@ -1,9 +1,9 @@
-import Login from '@/screen/login'
+import Login from '@/screen/login';
 
-export default function Home() {
+export default async function Home() {
   return (
-    <main>
+    <main style={{ height: '100%' }}>
       <Login />
-    </main >
-  )
+    </main>
+  );
 }

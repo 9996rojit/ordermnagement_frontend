@@ -1,101 +1,98 @@
-'use client'
-import { Button, Input } from "@/components"
-import { blockChain } from "@/config/image"
-import { Typography } from "@mui/material"
-import { Box } from "@mui/system"
-import Image from "next/image"
-import Link from "next/link"
-import { Controller, useForm } from "react-hook-form"
+'use client';
 
-const Login = () => {
+import { Button, FlexCenter, Input } from '@/components';
+import { Box, Typography } from '@mui/material';
+import Image from 'next/image';
+import React from 'react';
+import { blockChain } from '@/config/image';
+import { useForm, Controller } from 'react-hook-form';
 
-    const { control, handleSubmit } = useForm({
-        defaultValues: {
-            contact_number: "",
-            password: ''
-        }
-    })
+const LoginScreen = () => {
+  const {
+    handleSubmit,
+    control,
+    watch,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      contact_number: '',
+      password: '',
+    },
+  });
 
-    const onSubmit = (data: { contact_number: string, password: string }) => {
-        console.log(data)
+  const submit = (data: any) => {
+    console.log(data);
+  };
 
+  return (
+    <FlexCenter>
+      <Box sx={{ flex: 1, margin: 'auto' }}>
+        <form
+          onSubmit={handleSubmit(submit)}
+          style={{ width: '60%', margin: '0 auto' }}
+        >
+          <Box sx={{ paddingBottom: '1.5rem' }}>
+            <Typography variant="h3" component="div">
+              Login
+            </Typography>
+          </Box>
+          <Box sx={{ paddingBottom: '2rem' }}>
+            <Controller
+              name="contact_number"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  type="number"
+                  placeholder="please enter your contact number"
+                  label="Contact Number"
+                  error={false}
+                  required={false}
+                  variant="outlined"
+                  fullWidth
+                />
+              )}
+            />
+          </Box>
+          <Box sx={{ paddingBottom: '2rem' }}>
+            <Controller
+              name="password"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  type="password"
+                  placeholder="please enter your password"
+                  label="Password"
+                  error={false}
+                  required={false}
+                  variant="outlined"
+                  fullWidth
+                />
+              )}
+            />
+          </Box>
 
-    }
+          <Box sx={{ float: 'right', paddingBottom: '1rem' }}>
+            <Typography component="h6" variant="subtitle1">
+              Forget Password ?
+            </Typography>
+          </Box>
 
+          <Button
+            text={'Login'}
+            type="submit"
+            variant="contained"
+            fullWidth
+            size="large"
+          />
+        </form>
+      </Box>
+      <Box sx={{ flex: 1, margin: 'auto' }}>
+        <Image alt="image" src={blockChain} />
+      </Box>
+    </FlexCenter>
+  );
+};
 
-    return (
-        <Box className='flex items-center flex-wrap h-[100vh]'>
-            <Box className="flex-[0.5]">
-                <Box className="w-[80%] " style={{ "margin": '0 auto' }}>
-                    <Box className="mb-8">
-                        <Typography variant='h2'> Login</Typography>
-                    </Box>
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                        <Box className='mb-8'>
-                            <Controller
-                                name="contact_number"
-                                control={control}
-                                render={({ field }) => <Input
-                                    type="number"
-                                    label="Contact Number"
-                                    placeholder="Please Enter your contact number"
-                                    error={false}
-                                    variant='outlined'
-                                    required={true}
-                                    {...field}
-                                    fullWidth
-                                    InputProps={{ inputProps: { min: 9778888888, max: 9999999999 } }}
-
-                                />} />
-                        </Box>
-                        <Box className='mb-4'>
-                            <Controller
-                                name="password"
-                                control={control}
-                                render={({ field }) => <Input
-                                    type="password"
-                                    label='Password'
-                                    placeholder="Please Enter your password"
-                                    error={false}
-                                    variant='outlined'
-                                    required={true}
-                                    {...field}
-                                    fullWidth
-                                />
-                                }
-                            />
-                        </Box>
-                        <Box className=' flex justify-between mb-8'>
-                            <Box>
-                                Remember me
-                            </Box>
-                            <Box>
-                                Forget Password ?
-                            </Box>
-                        </Box>
-
-                        <Button type='submit' text='Login in' variant='contained' fullWidth size="large" />
-
-                        <Box className="mt-8">
-                            Dont Have an account? <Link href='/register'>Sign up</Link>
-                        </Box>
-                    </form>
-                </Box>
-
-            </Box >
-            <Box className="flex-[0.5] ">
-                <Box className="">
-                    <Image
-                        alt="image for login"
-                        src={blockChain}
-                        height={749}
-                    />
-                </Box>
-
-            </Box>
-        </Box >
-
-    )
-}
-
-export default Login
+export default LoginScreen;

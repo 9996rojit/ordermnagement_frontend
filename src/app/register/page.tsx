@@ -1,11 +1,7 @@
-import Register from "@/screen/register"
+import React from 'react';
 
-const index = () => {
-    return (
-        <>
-            <Register />
-        </>
-    )
-}
+const Register = () => {
+  return <div>Register</div>;
+};
 
-export default index
+export default Register;
