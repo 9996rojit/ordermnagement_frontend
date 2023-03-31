@@ -10,14 +10,17 @@ import {
   Inventory2,
   Paid,
   ProductionQuantityLimits,
-  ShoppingCartCheckout
+  ShoppingCartCheckout,
+  PersonAdd,
+  Logout,
+  KeyboardArrowDown,
+  KeyboardArrowUp,
 } from '@mui/icons-material';
-
 
 const AllUserMenu = [
   {
     name: 'Dashboard',
-    link: '/',
+    link: '/dashboard',
     children: [],
     icon: <DashboardCustomize />,
   },
@@ -25,24 +28,32 @@ const AllUserMenu = [
 const SuperAdminMenu = [
   {
     name: 'Users',
-    link: '/user',
+    link: '/dashboard/user',
     icon: <People />,
+    OpenIcon: <KeyboardArrowDown />,
+    CloseIcon: <KeyboardArrowUp />,
     children: [
       {
+        name: 'Add User',
+        link: '/dashboard/user/add-user',
+        children: [],
+        icon: <PersonAdd />,
+      },
+      {
         name: 'Active Users',
-        link: '/active',
+        link: '/dashboard/user/active',
         children: [],
         icon: <Person />,
       },
       {
         name: 'Pending Users',
-        link: '/pending',
+        link: '/dashboard/user/pending',
         children: [],
         icon: <PersonSearch />,
       },
       {
         name: 'InActive Users',
-        link: '/pending',
+        link: '/dashboard/user/inactive',
         children: [],
         icon: <PersonRemove />,
       },
@@ -50,18 +61,20 @@ const SuperAdminMenu = [
   },
   {
     name: 'Company',
-    link: '/company',
+    link: '/dashboard/company',
     icon: <Business />,
+    OpenIcon: <KeyboardArrowDown />,
+    CloseIcon: <KeyboardArrowUp />,
     children: [
       {
         name: 'Active Company',
-        link: '/active',
+        link: '/dashboard/company/active',
         icon: <Domain />,
         children: [],
       },
       {
         name: 'Pending Company',
-        link: '/pending',
+        link: '/dashboard/company/pending',
         icon: <AddBusiness />,
         children: [],
       },
@@ -69,41 +82,47 @@ const SuperAdminMenu = [
   },
   {
     name: 'Product',
-    link: '/product',
+    link: '/dashboard/product',
     children: [
       {
         name: 'Active Product',
-        link: '/active-product',
+        link: '/dashboard/product/active-product',
         children: [],
-        icon: <ShoppingCartCheckout />
+        icon: <ShoppingCartCheckout />,
       },
       {
         name: 'Pending Product',
-        link: '/pending-product',
+        link: '/dashboard/product/pending-product',
         children: [],
-        icon: <ProductionQuantityLimits />
-
-      }
+        icon: <ProductionQuantityLimits />,
+      },
     ],
-    icon: <Inventory2 />
+    icon: <Inventory2 />,
+    OpenIcon: <KeyboardArrowDown />,
+    CloseIcon: <KeyboardArrowUp />,
   },
   {
     name: 'Transaction',
-    link: '/transaction',
+    link: '/dashboard/transaction',
     children: [],
-    icon: <Paid />
-
-  }
+    icon: <Paid />,
+  },
+  {
+    name: 'Logout',
+    link: '/logout',
+    children: [],
+    icon: <Logout />,
+  },
 ];
 
 const menuCombiner: { [key: string]: any } = {
-  "superadmin": [...AllUserMenu, ...SuperAdminMenu],
-  "ceo": [],
+  superadmin: [...AllUserMenu, ...SuperAdminMenu],
+  ceo: [],
 };
 
-const getMenuItemWithPermissin = (userPermission: string) => {
+const getMenuItemWithPermission = (userPermission: string) => {
   if (!userPermission) return null;
   return menuCombiner[userPermission];
 };
 
-export default getMenuItemWithPermissin;
+export default getMenuItemWithPermission;

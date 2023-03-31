@@ -77,6 +77,15 @@ export const themeSettings = (mode: any) => {
             background: {
               default: colors.primary[500],
             },
+            components: {
+              MuiDrawer: {
+                styleOverrides: {
+                  paper: {
+                    background: 'orange',
+                  },
+                },
+              },
+            },
           }
         : {
             // palette values for light mode
@@ -93,6 +102,15 @@ export const themeSettings = (mode: any) => {
             },
             background: {
               default: '#fcfcfc',
+            },
+            components: {
+              MuiDrawer: {
+                styleOverrides: {
+                  paper: {
+                    background: 'orange',
+                  },
+                },
+              },
             },
           }),
     },
